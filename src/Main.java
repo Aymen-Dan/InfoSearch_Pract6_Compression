@@ -3,6 +3,7 @@ import utils.Dictionary;
 import utils.InvertedFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,11 +31,11 @@ public class Main {
         String[] decompressedDictionary = CompressionUtils.decompressDictionaryArray(readCompressedDictionary);
 
         // Print the array
-        printArray(dictionary.getVocab());
+     /*   printArray(dictionary.getVocab());
         System.out.println("\n\n");
-        System.out.println(decompressedDictionary);
+        printArray(decompressedDictionary);*/
 
-       /* // Check if the decompressed dictionary matches the original
+        // Check if the decompressed dictionary matches the original
         boolean dictionaryMatch = checkArraysEqual(dictionary.getVocab(), decompressedDictionary);
         System.out.println("Dictionary Compression/Decompression Match: " + dictionaryMatch);
 
@@ -52,7 +53,7 @@ public class Main {
 
         // Check if the decompressed inverted file matches the original
         boolean invertedFileMatch = checkListsEqual(getDocumentIds(invertedFile.documents), decompressedInvertedFile);
-        System.out.println("Inverted File Compression/Decompression Match: " + invertedFileMatch);*/
+        System.out.println("Inverted File Compression/Decompression Match: " + invertedFileMatch);
     }
 
 
@@ -76,9 +77,21 @@ public class Main {
         return new ArrayList<>();
     }
 
+    /**TODO: figure out why false*/
     // Helper method to check if two arrays are equal
-    private static boolean checkArraysEqual(String[] arr1, String[] arr2) {
-        return java.util.Arrays.equals(arr1, arr2);
+    public static boolean checkArraysEqual(String[] array1, String[] array2) {
+        // Check for null arrays or arrays of different lengths
+        if (array1 == null || array2 == null || array1.length != array2.length) {
+            return false;
+        }
+        // Iterate through elements and compare
+        for (int i = 0; i < array1.length; i++) {
+            if (!array1[i].equals(array2[i])) {
+                return false;
+            }
+        }
+        // If all elements are equal, arrays are considered equal
+        return true;
     }
 
     // Helper method to check if two lists are equal
